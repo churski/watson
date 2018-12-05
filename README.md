@@ -1,9 +1,12 @@
 ## Watson
-Assist for Jenkins Firefighting
+Assist for _Jenkins Firefighting_
 
-Finds unclaimed Jenkins jobs
+Finds unclaimed Jenkins builds
 
-Requires `config.py` file:
+Requires:
+* flask
+* jenkins api module
+* `config.py` file:
 ```
 jenkins_url = ''
 
