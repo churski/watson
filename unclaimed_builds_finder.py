@@ -28,7 +28,8 @@ class jenkins_unclaimed_builds_finder:
 		job = self.jenkins[job_name]
 		last = job.get_last_buildnumber()
 		failed_builds = []
-		for i in range(last - n, last + 1):
+		first = last - n if last - n > 0 else 1
+		for i in range(first, last + 1):
 			build = job.get_build(i)
 			if (build.get_status() == 'FAILURE'):
 				failed_builds.append(build)

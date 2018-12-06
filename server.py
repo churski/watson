@@ -31,11 +31,13 @@ def hello():
 	else:
 		header += "Initial update did not finish yet.<br>"
 	unclaimed = ""
+	i = 0
 	for job in builds_getter.get():
 		if builds_getter.get()[job]:
 			unclaimed += "<h2>%s</h2>" % job
 			for build in builds_getter.get()[job]:
 				unclaimed += button(i, "%s/%s" % (build.job.url, build.get_number()), build)
+				i += 1
 	if unclaimed or not update_time:
 		res = header + unclaimed
 	else:
@@ -77,7 +79,7 @@ def page_script():
 		  if (marked[id]) {
 			document.getElementById(id).style = "color: lightgray";
 		} else {
-			document.getElementById(id).style = "color: blue";
+			document.getElementById(id).style = "";
 		}
 	  }
   </script>
@@ -86,5 +88,5 @@ def page_script():
 
 def button(id, build_url, build_name):
 	return """
-<button onclick="switchMarked(%s)" style="border-radius: 3px;">Marker</button><a id=%s href='%s'>%s</a><br>
+<button onclick="switchMarked(%s)" style="border-radius: 5px; height:15px; width:15px; margin: 5px;"></button><a id=%s href='%s'>%s</a><br>
 """ % (id, id, build_url, build_name)
