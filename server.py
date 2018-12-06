@@ -35,7 +35,6 @@ def hello():
 		if builds_getter.get()[job]:
 			unclaimed += "<h2>%s</h2>" % job
 			for build in builds_getter.get()[job]:
-				unclaimed += "<input type=\"checkbox\"><a href=%s/%s>%s</a><br>" % (build.job.url, build.get_number(), build)
 				unclaimed += button(i, "%s/%s" % (build.job.url, build.get_number()), build)
 	if unclaimed or not update_time:
 		res = header + unclaimed
