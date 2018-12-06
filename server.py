@@ -54,11 +54,12 @@ def html_builder(body_content):
 <head>
 <title>Web Jenkins Claims</title>
 </head>
+%s
 <body>
 %s
 </body>
 </html>
-''' % body_content
+''' % (page_script(), body_content)
 
 def no_unclaimed():
 	return '''
