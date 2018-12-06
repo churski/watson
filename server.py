@@ -41,7 +41,7 @@ def hello():
 	if unclaimed or not update_time:
 		res = header + unclaimed
 	else:
-		res = header + no_unclaimed()
+		res = header + no_unclaimed
 	return html_builder(res)
 
 update_time = ""
@@ -57,20 +57,19 @@ def html_builder(body_content):
 <title>Web Jenkins Claims</title>
 </head>
 %s
+%s
 <body>
 %s
 </body>
 </html>
-''' % (page_script(), body_content)
+''' % (page_script, page_styles, body_content)
 
-def no_unclaimed():
-	return '''
+no_unclaimed = '''
 <br>It's a bug or
 <h2 style="color:green;">there are no unclaimed builds!</h2>
 '''
 
-def page_script():
-	return """
+page_script = """
   <script>
 	  marked = {}
 	  
@@ -85,8 +84,20 @@ def page_script():
   </script>
 """
 
+page_styles = """
+<style>
+button {
+	border-radius: 5px;
+	height: 15px;
+	width: 15px;
+	margin: 3px;
+}
+</style>
+"""
+	
+
 
 def button(id, build_url, build_name):
 	return """
-<button onclick="switchMarked(%s)" style="border-radius: 5px; height:15px; width:15px; margin: 5px;"></button><a id=%s href='%s'>%s</a><br>
+<button onclick="switchMarked(%s)"></button><a id=%s href='%s'>%s</a><br>
 """ % (id, id, build_url, build_name)
