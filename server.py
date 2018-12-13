@@ -9,9 +9,6 @@ import thread
 
 app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
-
 def update():
     global builds_getter
     global update_time
