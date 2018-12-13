@@ -1,21 +1,10 @@
 #!bin/python
 from unclaimed_builds_finder import jenkins_unclaimed_builds_finder
 from datetime import datetime
+import config
 
-try:
-	import config
-except ImportError:
-	config_file = open("config.py", "w")
-	config_file.write("""
-jenkins_url = ''
-
-username = ''
-token = ''
-
-jobs = []
-""")
-	config_file.close()
-	print "Fill config.py file"
+if not (config.username and config.token and config.jenkins_url and config.jobs):
+	print "Please, fill config.py file"
 	exit(1)
 
 class unclaimed_builds_getter:
@@ -34,6 +23,7 @@ class unclaimed_builds_getter:
 				for build in builds:
 					self.not_claimed[job].append(build)
 			except Exception, e:
+				print "Exception while getting builds of job %s" % job
 				print e	
 
 	def get(self):

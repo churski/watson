@@ -64,9 +64,14 @@ def html_builder(body_content):
 </html>
 ''' % (page_script, page_styles, body_content)
 
+def button(id, build_url, build_name):
+	return """
+<button onclick="switchMarked(%s)"></button><a id=%s href='%s'>%s</a><br>
+""" % (id, id, build_url, build_name)
+
+
 no_unclaimed = '''
-<br>It's a bug or
-<h2 style="color:green;">there are no unclaimed builds!</h2>
+<h2 style="color:green;">It seems that there are no unclaimed builds.</h2>
 '''
 
 page_script = """
@@ -94,10 +99,3 @@ button {
 }
 </style>
 """
-	
-
-
-def button(id, build_url, build_name):
-	return """
-<button onclick="switchMarked(%s)"></button><a id=%s href='%s'>%s</a><br>
-""" % (id, id, build_url, build_name)
